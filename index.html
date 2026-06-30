@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>战枭 - 2D RTS</title>
+    <link rel="stylesheet" href="./styles.css?v=20260627j" />
+  </head>
+  <body>
+    <main id="game" class="game-shell" aria-label="2D RTS 战场">
+      <canvas id="world" aria-label="战场画布"></canvas>
+      <section id="hud" class="hud-layer">
+        <div id="topBar" class="top-bar hud-runtime"></div>
+        <aside id="missionPanel" class="mission-panel panel hud-runtime"></aside>
+        <aside class="map-panel panel hud-runtime">
+          <canvas id="minimap" width="220" height="150" aria-label="小地图"></canvas>
+          <div id="mapMeta" class="map-meta"></div>
+        </aside>
+        <nav id="sideCommands" class="side-commands hud-runtime"></nav>
+        <button id="settingsBtn" class="settings-btn hud-runtime" type="button">设置</button>
+        <section id="settingsPanel" class="settings-panel panel hidden"></section>
+        <section id="bottomHud" class="bottom-hud panel hud-runtime"></section>
+        <section id="groupBar" class="group-bar panel hud-runtime"></section>
+        <div id="toastStack" class="toast-stack" aria-live="polite"></div>
+        <div id="tooltip" class="tooltip" hidden></div>
+      </section>
+
+      <section id="startModal" class="menu-layer">
+        <div id="homePage" class="menu-page">
+          <div class="menu-shell">
+            <header class="menu-topbar">
+              <div>
+                <div id="menuTitle" class="menu-title">战枭</div>
+                <div id="menuSubtitle" class="menu-subtitle">先选阵营，再选关卡，再开打</div>
+              </div>
+              <div class="menu-top-actions">
+                <button id="menuSettingsBtn" class="small-btn" type="button">设置</button>
+                <button id="menuLoadBtn" class="small-btn" type="button">继续存档</button>
+              </div>
+            </header>
+
+            <div class="menu-grid">
+              <section class="menu-hero panel">
+                <div class="menu-eyebrow">即时战略开局</div>
+                <div class="menu-hero-row">
+                  <div class="menu-hero-copy">
+                    <div class="menu-hero-head">主页</div>
+                    <p id="menuHeroText" class="menu-hero-text"></p>
+                  </div>
+                  <div id="menuHeroArt" class="menu-hero-art"></div>
+                </div>
+                <div class="menu-section-label">阵营选择</div>
+                <div id="factionChoices" class="faction-grid menu-faction-grid"></div>
+                <div class="menu-actions">
+                  <button id="menuLevelEntryBtn" class="primary-btn" type="button">进入关卡</button>
+                  <button id="startGameBtn" class="small-btn" type="button">快速开局</button>
+                </div>
+              </section>
+
+              <aside class="menu-side">
+                <section class="menu-mini-panel panel">
+                  <div class="menu-panel-title">当前配置</div>
+                  <div id="menuLevelSnapshot" class="menu-mini-copy"></div>
+                </section>
+                <section class="menu-mini-panel panel">
+                  <div class="menu-panel-title">快捷入口</div>
+                  <div class="menu-quick-grid">
+                    <button id="menuGuideBtn" class="small-btn" type="button">教程</button>
+                    <button id="menuCodexBtn" class="small-btn" type="button">图鉴</button>
+                    <button id="menuExitBtn" class="small-btn" type="button">退出</button>
+                  </div>
+                </section>
+                <section class="menu-mini-panel panel">
+                  <div class="menu-panel-title">说明</div>
+                  <div id="menuHomeHint" class="menu-mini-copy"></div>
+                </section>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <div id="levelSelectPage" class="menu-page hidden">
+          <div class="menu-shell">
+            <header class="menu-topbar">
+              <div>
+                <div class="menu-title">关卡选择</div>
+                <div id="menuLevelTitle" class="menu-subtitle">资源密度、敌人难度、敌人数量都会跟着关卡走</div>
+              </div>
+              <div class="menu-top-actions">
+                <button id="levelBackBtn" class="small-btn" type="button">返回主页</button>
+                <button id="levelStartBtn" class="primary-btn" type="button">开始战斗</button>
+              </div>
+            </header>
+
+            <div id="levelCardGrid" class="level-grid"></div>
+            <footer class="menu-footer panel">
+              <div id="menuLevelMeta" class="menu-mini-copy"></div>
+            </footer>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./game.js?v=20260627j"></script>
+  </body>
+</html>
