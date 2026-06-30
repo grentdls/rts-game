@@ -7,7 +7,9 @@
 3. Open the repository on GitHub.
 4. Go to `Settings` -> `Pages`.
 5. Under `Build and deployment`, choose:
-   - Source: `GitHub Actions`
+   - Source: `Deploy from a branch`
+   - Branch: `gh-pages`
+   - Folder: `/ (root)`
 6. Save.
 
 GitHub will generate a website URL like:
@@ -31,9 +33,7 @@ After editing the game:
 ```powershell
 git add index.html styles.css game.js README.md DEPLOY_GITHUB_PAGES.md publish-github-pages.ps1 .gitignore .nojekyll
 git commit -m "Update game"
-git push
+.\publish-github-pages.ps1 "https://github.com/YOUR_NAME/YOUR_REPOSITORY.git"
 ```
 
-GitHub Pages will update automatically after the push.
-
-This repository also includes `.github/workflows/pages.yml`, which deploys `index.html`, `styles.css`, `game.js`, and `.nojekyll` with the official GitHub Pages Actions.
+The helper script pushes the source branch `main` and updates the playable website branch `gh-pages`.

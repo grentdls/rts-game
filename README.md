@@ -16,7 +16,7 @@ http://127.0.0.1:5173/
 
 ## GitHub Pages
 
-Use GitHub Pages with the `main` branch and the repository root as the publish source.
+Use GitHub Pages with the `gh-pages` branch and the repository root as the publish source.
 
 After creating an empty GitHub repository, this helper script can push the project:
 

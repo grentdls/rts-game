@@ -21,7 +21,7 @@ if ($remoteExists) {
   git remote add origin $RepositoryUrl
 }
 
-git add index.html styles.css game.js README.md DEPLOY_GITHUB_PAGES.md publish-github-pages.ps1 .gitignore .nojekyll .github/workflows/pages.yml
+git add index.html styles.css game.js README.md DEPLOY_GITHUB_PAGES.md publish-github-pages.ps1 .gitignore .nojekyll
 git commit -m "Publish browser RTS game" 2>$null
 if ($LASTEXITCODE -ne 0) {
   Write-Host "No new commit was created. Continuing with push."
@@ -29,6 +29,35 @@ if ($LASTEXITCODE -ne 0) {
 
 git push -u origin main
 
+$deployPath = Join-Path (Get-Location).Path "_gh_pages_worktree"
+if (Test-Path -LiteralPath $deployPath) {
+  throw "Temporary deployment worktree already exists: $deployPath"
+}
+
+try {
+  $hasGhPages = git ls-remote --heads origin gh-pages
+  if ($hasGhPages) {
+    git worktree add -B gh-pages $deployPath origin/gh-pages
+  } else {
+    git worktree add --orphan -b gh-pages $deployPath
+  }
+
+  Copy-Item -LiteralPath index.html,styles.css,game.js,.nojekyll -Destination $deployPath -Force
+  Push-Location $deployPath
+  git add index.html styles.css game.js .nojekyll
+  git commit -m "Publish static site" 2>$null
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host "No website changes were committed. Continuing."
+  }
+  git push -u origin gh-pages
+  Pop-Location
+} finally {
+  if ((Get-Location).Path -eq $deployPath) {
+    Pop-Location
+  }
+  git worktree remove $deployPath --force 2>$null
+}
+
 Write-Host ""
 Write-Host "Push complete."
-Write-Host "Now open the GitHub repository: Settings -> Pages -> Deploy from a branch -> main -> /(root)."
+Write-Host "GitHub Pages URL: https://grentdls.github.io/rts-game/"
