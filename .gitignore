@@ -4,7 +4,7 @@ Thumbs.db
 *.log
 node_modules/
 dist/
+_site/
 .vite/
 .env
 .env.*
-

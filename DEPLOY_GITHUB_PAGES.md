@@ -7,9 +7,7 @@
 3. Open the repository on GitHub.
 4. Go to `Settings` -> `Pages`.
 5. Under `Build and deployment`, choose:
-   - Source: `Deploy from a branch`
-   - Branch: `main`
-   - Folder: `/ (root)`
+   - Source: `GitHub Actions`
 6. Save.
 
 GitHub will generate a website URL like:
@@ -37,3 +35,5 @@ git push
 ```
 
 GitHub Pages will update automatically after the push.
+
+This repository also includes `.github/workflows/pages.yml`, which deploys `index.html`, `styles.css`, `game.js`, and `.nojekyll` with the official GitHub Pages Actions.
